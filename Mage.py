@@ -1,8 +1,10 @@
+import sys
 from Player import Player
 
 def magicMissile(level):
     for i in range(level):
-        print level
+        sys.stdout.write(level)
+        sys.stdout.flush()
 
 class Mage(Player):
 

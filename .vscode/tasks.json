@@ -3,5 +3,12 @@
 	"command": "python",
 	"isShellCommand": true,
 	"showOutput": "always",
-	"args": ["${file}"]
+	"args": ["index.py"],
+    "problemMatcher": {
+        "fileLocation": ["relative", "${workspaceRoot}"],
+        "pattern": {
+            "regexp": "^(.*)+s$",
+            "message": 1
+        }
+    }
 }
