@@ -2,15 +2,18 @@ import pygame
 
 class Game(object):
     MAX_TICKS = 10.0
-    width = 400
-    height = 300
+    gridWidth = 400
+    gridHeight = 300
+    textWidth = 400
+    textHeight = 300
     gridSize = 20
 
     def __init__(self):
         self.screenDirty = True
         self.gameObjects = []
         self.bcg = None
-        self.screen = pygame.display.set_mode((Game.width, Game.height))
+        self.tw = None
+        self.screen = pygame.display.set_mode((max(Game.gridWidth, Game.textWidth), Game.gridHeight + Game.textHeight))
     
     def addGameObject(self, obj):
         self.gameObjects += [obj]
@@ -18,8 +21,14 @@ class Game(object):
     def setBackgroundImage(self, bcg):
         self.bcg = bcg
 
+    def setTextWindow(self, tw):
+        self.tw = tw
+
     def setDirty(self):
         self.isDirty = True
+    
+    def writeMessage(self, message):
+        self.tw.writeStrings(message)
 
     def update(self):
         for obj in self.gameObjects:
@@ -30,6 +39,7 @@ class Game(object):
         if not self.screenDirty:
             return        
         self.screen.blit(self.bcg, (0, 0))
+        self.screen.blit(self.tw.textScreen, (0, Game.gridHeight))
         for obj in self.gameObjects:
             obj.draw(self)
         self.isDirty = False

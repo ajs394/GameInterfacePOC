@@ -1,6 +1,7 @@
 import pygame
 from Game import Game
 from Grid import Grid
+from TextWindow import TextWindow
 from Player import Player
 from Mage import Mage
 
@@ -10,7 +11,9 @@ done = False
 
 game = Game()
 grid = Grid()
+textWindow = TextWindow()
 game.setBackgroundImage(grid.gridScreen)
+game.setTextWindow(textWindow)
 player = Mage()
 player2 = player
 game.addGameObject(player)
