@@ -2,6 +2,7 @@ import pygame
 from Game import Game
 from Grid import Grid
 from Player import Player
+from Mage import Mage
 
 pygame.init()
 
@@ -10,7 +11,7 @@ done = False
 game = Game()
 grid = Grid()
 game.setBackgroundImage(grid.gridScreen)
-player = Player()
+player = Mage()
 player2 = player
 game.addGameObject(player)
 
@@ -20,6 +21,8 @@ while not done:
             done = True
     x = y = 0
     pressed = pygame.key.get_pressed()
+
+    # first player movement
     if pressed[pygame.K_RETURN]:
         player2 = Player()
         game.addGameObject(player2)
@@ -33,6 +36,8 @@ while not done:
         x += 1
     if x != 0 or y != 0:
         player.move(x, y)
+
+    # second player movement
     x = y = 0
     if pressed[pygame.K_w]: 
         y -= 1
@@ -44,6 +49,13 @@ while not done:
         x += 1
     if x != 0 or y != 0:
         player2.move(x, y)
+
+    # abilities and leveling
+    if not pressed[pygame.K_LSHIFT] and pressed[pygame.K_1]:
+        player.useAbility(0)
+    if pressed[pygame.K_LSHIFT] and pressed[pygame.K_1]:
+        player.levelUp()
+
     # Add this somewhere after the event pumping and before the display.flip() 
     game.update().draw()
     pygame.display.flip()

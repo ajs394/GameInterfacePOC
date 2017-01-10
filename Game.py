@@ -1,6 +1,6 @@
 import pygame
 
-class Game():
+class Game(object):
     MAX_TICKS = 10.0
     width = 400
     height = 300

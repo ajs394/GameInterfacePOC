@@ -2,7 +2,7 @@ import pygame
 from Game import Game
 from Grid import Grid
 
-class Player():
+class Player(object):
     newPlayerInitialPos = [(0, 0),(Grid.gridMaxX - 1, 0),(Grid.gridMaxX - 1, Grid.gridMaxY - 1),(0, Grid.gridMaxY - 1)]
     newPlayerInitialPosInc = 0
     newPlayerColors = [(100, 149, 237), (50, 205, 50), (205, 92, 92), (147, 112, 219)]

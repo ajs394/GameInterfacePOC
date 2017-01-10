@@ -1,7 +1,7 @@
 import pygame
 from Game import Game
 
-class Grid():
+class Grid(object):
     gridMaxX = Game.width/Game.gridSize
     gridMaxY = Game.height/Game.gridSize
     gridColor = (255, 255, 255)
