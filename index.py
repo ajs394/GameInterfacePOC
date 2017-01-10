@@ -57,7 +57,39 @@ while not done:
     if not pressed[pygame.K_LSHIFT] and pressed[pygame.K_1]:
         player.useAbility(0)
     if pressed[pygame.K_LSHIFT] and pressed[pygame.K_1]:
-        player.levelUp()
+        player.levelUp(0)
+    if not pressed[pygame.K_LSHIFT] and pressed[pygame.K_2]:
+        player.useAbility(1)
+    if pressed[pygame.K_LSHIFT] and pressed[pygame.K_2]:
+        player.levelUp(1)
+    if not pressed[pygame.K_LSHIFT] and pressed[pygame.K_3]:
+        player.useAbility(2)
+    if pressed[pygame.K_LSHIFT] and pressed[pygame.K_3]:
+        player.levelUp(2)
+    if not pressed[pygame.K_LSHIFT] and pressed[pygame.K_4]:
+        player.useAbility(3)
+    if pressed[pygame.K_LSHIFT] and pressed[pygame.K_4]:
+        player.levelUp(3)
+    if not pressed[pygame.K_LSHIFT] and pressed[pygame.K_5]:
+        player.useAbility(4)
+    if pressed[pygame.K_LSHIFT] and pressed[pygame.K_5]:
+        player.levelUp(4)
+    if not pressed[pygame.K_LSHIFT] and pressed[pygame.K_6]:
+        player.useAbility(5)
+    if pressed[pygame.K_LSHIFT] and pressed[pygame.K_6]:
+        player.levelUp(5)
+    if not pressed[pygame.K_LSHIFT] and pressed[pygame.K_7]:
+        player.useAbility(6)
+    if pressed[pygame.K_LSHIFT] and pressed[pygame.K_7]:
+        player.levelUp(6)
+    if not pressed[pygame.K_LSHIFT] and pressed[pygame.K_8]:
+        player.useAbility(7)
+    if pressed[pygame.K_LSHIFT] and pressed[pygame.K_8]:
+        player.levelUp(7)
+    if not pressed[pygame.K_LSHIFT] and pressed[pygame.K_9]:
+        player.useAbility(8)
+    if pressed[pygame.K_LSHIFT] and pressed[pygame.K_9]:
+        player.levelUp(8)
 
     # Add this somewhere after the event pumping and before the display.flip() 
     game.update().draw()
