@@ -3,7 +3,7 @@
 	"command": "python",
 	"isShellCommand": true,
 	"showOutput": "always",
-	"args": ["index.py"],
+	"args": ["__init__.py"],
     "problemMatcher": {
         "fileLocation": ["relative", "${workspaceRoot}"],
         "pattern": {

@@ -2,11 +2,7 @@ import pygame
 from Game import Game
 
 class Grid(object):
-    gridMaxX = Game.gridWidth/Game.gridSize
-    gridMaxY = Game.gridHeight/Game.gridSize
     gridColor = (255, 255, 255)
-    
-    grid = [[] for x in xrange(gridMaxX)]
     
     def __init__(self):
         self.gridScreen = pygame.Surface((Game.gridWidth, Game.gridHeight))

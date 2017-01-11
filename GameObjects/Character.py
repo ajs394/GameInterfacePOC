@@ -2,27 +2,24 @@ import pygame
 from Game import Game
 from Grid import Grid
 
-class Player(object):
-    newPlayerInitialPos = [(0, 0),(Grid.gridMaxX - 1, 0),(Grid.gridMaxX - 1, Grid.gridMaxY - 1),(0, Grid.gridMaxY - 1)]
-    newPlayerInitialPosInc = 0
-    newPlayerColors = [(100, 149, 237), (50, 205, 50), (205, 92, 92), (147, 112, 219)]
-    newPlayerColorsInc = 0
+class Character(object):
 
     def __init__(self):
+        self.messages = []
+        self.faction = ''
+        self.name = '?'
         self.isIdle = True
         self.updateTick = 0
-        self.color = Player.newPlayerColors[Player.newPlayerColorsInc]
-        Player.newPlayerColorsInc = (Player.newPlayerColorsInc + 1) % 4
-        self.pos = Player.newPlayerInitialPos[Player.newPlayerInitialPosInc]
+        self.color = None
+        self.pos = (0 , 0)
         self.drawX = self.pos[0]
         self.drawY = self.pos[1]
         self.destinationPos = self.pos
-        Player.newPlayerInitialPosInc = (Player.newPlayerInitialPosInc + 1) % 4
-        self.playerScreen = pygame.Surface((Game.gridSize, Game.gridSize))
-        pygame.draw.rect(self.playerScreen, self.color, pygame.Rect(0, 0, Game.gridSize, Game.gridSize))
+        # each inheriting class should overwrite the bottom two lines of code
+        # we might remove these entirely
         
     def draw(self, game):
-        game.screen.blit(self.playerScreen, (self.drawX*Game.gridSize, self.drawY*Game.gridSize))
+        game.screen.blit(self.characterScreen, (self.drawX*Game.gridSize, self.drawY*Game.gridSize))
 
     def move(self, x, y):
         if not self.isIdle:
@@ -31,15 +28,14 @@ class Player(object):
         newY = self.pos[1] + y
         if newX < 0:
             newX = 0
-        if newX >= Grid.gridMaxX:
-            newX = Grid.gridMaxX - 1
+        if newX >= Game.gridMaxX:
+            newX = Game.gridMaxX - 1
         if newY < 0:
             newY = 0
-        if newY >= Grid.gridMaxY:
-            newY = Grid.gridMaxY - 1
+        if newY >= Game.gridMaxY:
+            newY = Game.gridMaxY - 1
         if newX == self.pos[0] and newY == self.pos[1]:
             return
-        print 'Moving: x ->',x,'y ->',y
         self.isIdle = False
         self.destinationPos = (newX, newY)
 
@@ -55,3 +51,6 @@ class Player(object):
                 self.updateTick = 0
                 self.isIdle = True
                 self.pos = self.destinationPos
+
+    def isHostile(self, other):
+        return self.faction != other.faction

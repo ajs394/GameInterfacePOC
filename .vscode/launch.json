@@ -8,7 +8,7 @@
             "request": "launch",
             "stopOnEntry": false,
             "console": "none",
-            "program": "${workspaceRoot}/index.py",
+            "program": "${workspaceRoot}/__init__.py",
             "cwd": "${workspaceRoot}",
             "debugOptions": [
                 "WaitOnAbnormalExit",

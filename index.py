@@ -1,9 +1,11 @@
 import pygame
+import random
 from Game import Game
 from Grid import Grid
 from TextWindow import TextWindow
 from Player import Player
 from Mage import Mage
+from Enemy import Enemy
 
 pygame.init()
 
@@ -15,7 +17,7 @@ textWindow = TextWindow()
 game.setBackgroundImage(grid.gridScreen)
 game.setTextWindow(textWindow)
 player = Mage()
-player2 = player
+enemy = player
 game.addGameObject(player)
 
 while not done:
@@ -27,8 +29,13 @@ while not done:
 
     # first player movement
     if pressed[pygame.K_RETURN]:
-        player2 = Player()
-        game.addGameObject(player2)
+        enemyXPos = random.randrange(0, game.gridMaxX-1, 1)
+        enemyYPos = random.randrange(0, game.gridMaxY-1, 1)
+        while game.isGridSpaceOccupied((enemyXPos, enemyYPos)): 
+            enemyXPos = random.randrange(0, game.gridMaxX-1, 1)
+            enemyYPos = random.randrange(0, game.gridMaxY-1, 1)
+        enemy = Enemy((enemyXPos, enemyYPos))
+        game.addGameObject(enemy)
     if pressed[pygame.K_UP]: 
         y -= 1
     if pressed[pygame.K_DOWN]: 
@@ -51,7 +58,7 @@ while not done:
     if pressed[pygame.K_d]: 
         x += 1
     if x != 0 or y != 0:
-        player2.move(x, y)
+        enemy.move(x, y)
 
     # abilities and leveling
     if not pressed[pygame.K_LSHIFT] and pressed[pygame.K_1]:
@@ -90,6 +97,10 @@ while not done:
         player.useAbility(8)
     if pressed[pygame.K_LSHIFT] and pressed[pygame.K_9]:
         player.levelUp(8)
+
+    # tab targeting
+    if pressed[pygame.K_TAB]:
+        player.tabTarget(game)
 
     # Add this somewhere after the event pumping and before the display.flip() 
     game.update().draw()
