@@ -1,0 +1,24 @@
+### When working on an item, grab everything below a comment.  Leave the 
+### comment, say that you're working on it.  Feel free to add to sections or
+### create new sections at will
+
+# Character action related
+implement a gcd - this would be done at the Character level
+ability cooldowns - done at the Player level?  maybe character
+
+# ability use and modification
+synergies - in abilities, maybe we should make an ability base class?
+
+# tracking effectiveness of character actions (interesting thing here is 'damage' 
+# is a fairly arbitrary thing.  We can measure this with health, some score, 
+# call it whatever we want)
+health on targets - Character level
+ - some way to track damage or whatever at least
+
+# Character movement
+planning on implementing click based movement - in game and character
+gonna write a quick search algo for shortest path - in game
+{
+    def findShortestPath(self, pos1, pos2):
+        return [(x, y)]
+}
