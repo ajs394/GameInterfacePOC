@@ -21,6 +21,26 @@ implement dots, etc.
 implement terrain and aoe persistent effects
 implement delayed effects
 
+potential solution - give Character a list of 'effects' or something where each
+is an object.  During Character.update(), scan list and apply on self
+{
+    class Effect():
+        def __init__(self):
+            self.message = 'i did something'
+        def apply(self, effected):
+            # probs something like 'do 2 damage'
+            effected.writeMessage(self.message)
+
+    class Character():
+        def __init__(self):
+            # existing code
+            self.effects = []
+        def update(self):
+            # existing code
+            for effect in self.effects:
+                effect.apply(self)
+}
+
 # Character movement
 planning on implementing click based movement - in game and character
 gonna write a quick search algo for shortest path - in game
