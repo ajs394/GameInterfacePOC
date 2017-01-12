@@ -3,8 +3,8 @@
 ### create new sections at will
 
 # Character action related
-implement a gcd - this would be done at the Character level
-ability cooldowns - done at the Player level?  maybe character
+Alec working on - > implement a gcd - this would be done at the Character level
+Alec working on - > ability cooldowns - done at the Player level?  maybe character
 
 # ability use and modification
 synergies - in abilities, maybe we should make an ability base class?
