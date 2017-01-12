@@ -1,7 +1,9 @@
 # GameInterfacePOC
 Quick MMO project with Griff
 
-Run the index.py script.  Move with arrow keys, spawn new players enter and move with WASD.  
-Abilities will be used with the number keys, shit+number will level up abilities 
+Run the __init__.py script in base dir (vscode ctrl+shift+b, or debug with f5)
+ - Move with arrow keys, spawn enemies with enter and move with WASD.  
+ - Abilities will be used with the number keys, shift+number will level up
+ - Tab will attempt to target nearest enemy, will not target out of range
 
-<=====3
+¯\_(ツ)_/¯ <=====3
