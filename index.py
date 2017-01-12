@@ -105,4 +105,4 @@ while not done:
     # Add this somewhere after the event pumping and before the display.flip() 
     game.update().draw()
     pygame.display.flip()
-    pygame.time.delay(50)
+    pygame.time.delay(Game.SERVER_TICK_LENGTH)

@@ -3,8 +3,8 @@
 ### create new sections at will
 
 # Character action related
-Alec working on - > implement a gcd - this would be done at the Character level
-Alec working on - > ability cooldowns - done at the Player level?  maybe character
+Alec has done a first draft of - > implement a gcd - this would be done at the Character level
+Alec has done a first draft of - > ability cooldowns - done at the Player level?  maybe character
 
 # ability use and modification
 synergies - in abilities, maybe we should make an ability base class?
@@ -14,6 +14,12 @@ synergies - in abilities, maybe we should make an ability base class?
 # call it whatever we want)
 health on targets - Character level
  - some way to track damage or whatever at least
+
+# Persistent ability effects
+implement some system for buffs
+implement dots, etc.
+implement terrain and aoe persistent effects
+implement delayed effects
 
 # Character movement
 planning on implementing click based movement - in game and character

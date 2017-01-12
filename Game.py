@@ -2,6 +2,7 @@ import pygame
 import math
 
 class Game(object):
+    SERVER_TICK_LENGTH = 50
     MAX_TICKS = 10.0
     gridWidth = 400
     gridHeight = 300

@@ -14,12 +14,10 @@ class Player(Character):
     abilityNames = []
 
     def __init__(self):
+        super(Player, self).__init__()
         self.targetTick = 0
-        self.messages = []
-        self.levels = []
+        self.abilities = []
         self.faction = 'good guys'
-        self.isIdle = True
-        self.updateTick = 0
         self.color = Player.newPlayerColors[Player.newPlayerColorsInc]
         Player.newPlayerColorsInc = (Player.newPlayerColorsInc + 1) % 4
         self.pos = Player.newPlayerInitialPos[Player.newPlayerInitialPosInc]
@@ -42,20 +40,33 @@ class Player(Character):
             game.screen.blit(playerTargetScreen, ((self.target.drawX + 1.0/2)*Game.gridSize - positionOffset, (self.target.drawY + 1.0/2)*Game.gridSize - positionOffset))
             self.targetTick = (self.targetTick + 1)%24
 
+    def update(self, game):
+        if self.messages != []:
+            game.writeMessage(self.messages)
+            self.messages = []
+        for ability in self.abilities:
+            ability.update()
+        super(Player, self).update(game)
+
     def levelUp(self, i):
-        self.messages += ['Leveling Up ' + self.__class__.abilities[i].name + '!']
-        self.levels[i] += 1
+        self.messages += ['Leveling Up ' + self.abilities[i].name + '!']
+        self.abilities[i].levelUp()
 
     def useAbility(self, index):
-        if index >= len(self.__class__.abilities):
+        if self.gcdTick > 0:
+            self.messages += ['GCD not cleared']
+            return
+        if index >= len(self.abilities):
             self.messages += ['Ability key not bound']
             return
-        self.messages += ['Casting ' + self.__class__.abilities[index].name + '!']
-        self.__class__.abilities[index].cast(self, self.levels[index])
+        castReturn = self.abilities[index].cast()
+        if castReturn != None:
+            for message in castReturn:
+                self.messages += [message]
 
     def getMaxRange(self):
         maxRange = 0
-        for spell in self.__class__.abilities:
+        for spell in self.abilities:
             maxRange = max(maxRange, spell.spellRange)
         return maxRange
 

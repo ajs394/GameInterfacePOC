@@ -3,26 +3,29 @@ from Game import Game
 from Grid import Grid
 
 class Character(object):
+    # in server ticks
+    GCD_DURATION = 10.0
+    MOVEMENT_DURATION = 10.0
 
     def __init__(self):
+        self.gcdTick = 0
         self.messages = []
         self.faction = ''
         self.name = '?'
-        self.isIdle = True
+        self.canMove = True
         self.updateTick = 0
         self.color = None
         self.pos = (0 , 0)
         self.drawX = self.pos[0]
         self.drawY = self.pos[1]
         self.destinationPos = self.pos
-        # each inheriting class should overwrite the bottom two lines of code
-        # we might remove these entirely
+        self.characterScreen = None
         
     def draw(self, game):
         game.screen.blit(self.characterScreen, (self.drawX*Game.gridSize, self.drawY*Game.gridSize))
 
     def move(self, x, y):
-        if not self.isIdle:
+        if not self.canMove:
             return
         newX = self.pos[0] + x
         newY = self.pos[1] + y
@@ -36,21 +39,24 @@ class Character(object):
             newY = Game.gridMaxY - 1
         if newX == self.pos[0] and newY == self.pos[1]:
             return
-        self.isIdle = False
+        self.canMove = False
         self.destinationPos = (newX, newY)
 
     def update(self, game):
-        if self.isIdle:
-            return
         if self.destinationPos[0] != self.pos[0] or self.destinationPos[1] != self.pos[1]:
             game.setDirty()
             self.updateTick += 1
-            self.drawX = self.pos[0] + ((self.destinationPos[0] - self.pos[0])*self.updateTick/Game.MAX_TICKS)
-            self.drawY = self.pos[1] + ((self.destinationPos[1] - self.pos[1])*self.updateTick/Game.MAX_TICKS)
-            if self.updateTick == Game.MAX_TICKS:
+            self.drawX = self.pos[0] + ((self.destinationPos[0] - self.pos[0])*self.updateTick/Character.MOVEMENT_DURATION)
+            self.drawY = self.pos[1] + ((self.destinationPos[1] - self.pos[1])*self.updateTick/Character.MOVEMENT_DURATION)
+            if self.updateTick == Character.MOVEMENT_DURATION:
                 self.updateTick = 0
-                self.isIdle = True
+                self.canMove = True
                 self.pos = self.destinationPos
+        if self.gcdTick > 0:
+            self.gcdTick -= 1
+
+    def setGcd(self):
+        self.gcdTick = Character.GCD_DURATION
 
     def isHostile(self, other):
         return self.faction != other.faction
