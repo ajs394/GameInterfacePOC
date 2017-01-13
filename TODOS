@@ -11,6 +11,7 @@ Alec has done a first draft of - > implement a gcd - this would be done at the C
 Alec has done a first draft of - > ability cooldowns - done at the Player level?  maybe character
 
 # ability use and modification
+< -- Alec has added an ability base class, nothing for synergies yet though
 synergies - in abilities, maybe we should make an ability base class?
 
 # tracking effectiveness of character actions (interesting thing here is 'damage' 
@@ -18,6 +19,14 @@ synergies - in abilities, maybe we should make an ability base class?
 # call it whatever we want)
 health on targets - Character level
  - some way to track damage or whatever at least
+
+# Character display: figure out how we want to do a 'hud' and start implementing
+how does the character know abilities and cooldowns?
+does the character have health? mana? other resources? how are these displayed
+visual or audio indication other than the text pane at the bottom
+
+# How does sound work in pygame?
+???
 
 # Persistent ability effects
 implement some system for buffs

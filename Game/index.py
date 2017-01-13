@@ -1,5 +1,4 @@
 # pylint: disable=C0103
-import sys
 import random
 import pygame
 from GameInterfacePOC.Game.Game import Game
@@ -103,7 +102,7 @@ while not done:
     if pressed[pygame.K_TAB]:
         player.tab_target(game)
 
-    # Add this somewhere after the event pumping and before the display.flip() 
+    # Add this somewhere after the event pumping and before the display.flip()
     game.update().draw()
     pygame.display.flip()
     pygame.time.delay(Game.server_tick_length)
