@@ -1,15 +1,17 @@
 {
-    "version": "0.0.1",
+    "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python",
+            "name": "Python Module",
             "type": "python",
             "pythonPath":"${config.python.pythonPath}", 
             "request": "launch",
             "stopOnEntry": false,
-            "console": "none",
-            "program": "${workspaceRoot}/__init__.py",
-            "cwd": "${workspaceRoot}",
+            "module": "GameInterfacePOC.Game.index",
+            "cwd": "${workspaceRoot}/..",
+            "args": [
+                
+            ],
             "debugOptions": [
                 "WaitOnAbnormalExit",
                 "WaitOnNormalExit",

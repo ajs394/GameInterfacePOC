@@ -1,6 +1,5 @@
-import sys
-from Player import Player
-import MageSpells
+from GameInterfacePOC.GameObjects.Player import Player
+from GameInterfacePOC.Abilities import MageSpells
 
 class Mage(Player):
     def __init__(self):

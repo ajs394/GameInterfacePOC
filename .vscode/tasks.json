@@ -1,14 +1,7 @@
 {
 	"version": "0.1.0",
-	"command": "python",
+	"command": "cd",
 	"isShellCommand": true,
 	"showOutput": "always",
-	"args": ["__init__.py"],
-    "problemMatcher": {
-        "fileLocation": ["relative", "${workspaceRoot}"],
-        "pattern": {
-            "regexp": "^(.*)+s$",
-            "message": 1
-        }
-    }
+	"args": ["..", "&&", "python", "-m", "GameInterfacePOC.Game.index"]
 }

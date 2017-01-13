@@ -1,7 +1,6 @@
 import pygame
-from Character import Character
-from Game import Game
-from Grid import Grid
+from GameInterfacePOC.GameObjects.Character import Character
+from GameInterfacePOC.Game.Game import Game
 
 class Enemy(Character):
     enemyColor = (92, 205, 92)
@@ -11,8 +10,9 @@ class Enemy(Character):
         self.faction = 'bad guys'
         self.color = Enemy.enemyColor
         self.pos = pos
-        self.drawX = self.pos[0]
-        self.drawY = self.pos[1]
-        self.destinationPos = self.pos
-        self.characterScreen = pygame.Surface((Game.gridSize, Game.gridSize))
-        pygame.draw.rect(self.characterScreen, self.color, pygame.Rect(0, 0, Game.gridSize, Game.gridSize))
+        self.draw_x = self.pos[0]
+        self.draw_y = self.pos[1]
+        self.destination_pos = self.pos
+        self.character_screen = pygame.Surface((Game.grid_size, Game.grid_size))
+        pygame.draw.rect(self.character_screen, self.color,
+                         pygame.Rect(0, 0, Game.grid_size, Game.grid_size))

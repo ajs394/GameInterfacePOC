@@ -2,6 +2,10 @@
 ### comment, say that you're working on it.  Feel free to add to sections or
 ### create new sections at will
 
+# General code cleanup and refactoring
+Add a parent class to character in GameObjects - we should plan for non-char
+objects like terrain or whatever
+
 # Character action related
 Alec has done a first draft of - > implement a gcd - this would be done at the Character level
 Alec has done a first draft of - > ability cooldowns - done at the Player level?  maybe character
@@ -29,7 +33,7 @@ is an object.  During Character.update(), scan list and apply on self
             self.message = 'i did something'
         def apply(self, effected):
             # probs something like 'do 2 damage'
-            effected.writeMessage(self.message)
+            effected.write_message(self.message)
 
     class Character():
         def __init__(self):

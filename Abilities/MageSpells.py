@@ -1,13 +1,13 @@
 from Ability import Ability
-from Character import Character
+from GameInterfacePOC.GameObjects.Character import Character
 
 class MagicMissile(Ability):
     def __init__(self, player):
         super(MagicMissile, self).__init__(player)
         self.name = 'Magic Missile'
-        self.spellRange = 5
-        self.maxLevel = 9
-        self.CD_DURATION = 0
+        self.spell_range = 5
+        self.max_level = 9
+        self.cd_duration = 0
         self.level = 1
 
     def cast(self):
@@ -17,16 +17,16 @@ class MagicMissile(Ability):
         message = ['Casting ' + self.name + '!']
         for i in range(self.level):
             message += ['did ' + str(i + 1) + ' damage']
-        self.player.setGcd()
+        self.player.set_gcd()
         return message
 
 class FireBall(Ability):
     def __init__(self, player):
         super(FireBall, self).__init__(player)
         self.name = 'Fire Ball'
-        self.spellRange = 4
-        self.maxLevel = 9
-        self.CD_DURATION = Character.GCD_DURATION * 5
+        self.spell_range = 4
+        self.max_level = 9
+        self.cd_duration = Character.gcd_duration * 5
         self.level = 1
 
     def cast(self):
@@ -35,5 +35,5 @@ class FireBall(Ability):
             return message
         message = ['Casting ' + self.name + '!']
         message += ['did ' + str(5*(self.level)) + ' damage in a 3x3 grid']
-        self.player.setGcd()
+        self.player.set_gcd()
         return message

@@ -1,11 +1,12 @@
-import pygame
+# pylint: disable=C0103
+import sys
 import random
-from Game import Game
-from Grid import Grid
-from TextWindow import TextWindow
-from Player import Player
-from Mage import Mage
-from Enemy import Enemy
+import pygame
+from GameInterfacePOC.Game.Game import Game
+from GameInterfacePOC.Surfaces.Grid import Grid
+from GameInterfacePOC.Surfaces.TextWindow import TextWindow
+from GameInterfacePOC.GameObjects.Enemy import Enemy
+from GameInterfacePOC.CharacterClasses.Mage import Mage
 
 pygame.init()
 
@@ -13,12 +14,12 @@ done = False
 
 game = Game()
 grid = Grid()
-textWindow = TextWindow()
-game.setBackgroundImage(grid.gridScreen)
-game.setTextWindow(textWindow)
+text_window = TextWindow()
+game.set_background_image(grid.grid_screen)
+game.set_text_window(text_window)
 player = Mage()
 enemy = player
-game.addGameObject(player)
+game.add_game_object(player)
 
 while not done:
     for event in pygame.event.get():
@@ -29,80 +30,80 @@ while not done:
 
     # first player movement
     if pressed[pygame.K_RETURN]:
-        enemyXPos = random.randrange(0, game.gridMaxX-1, 1)
-        enemyYPos = random.randrange(0, game.gridMaxY-1, 1)
-        while game.isGridSpaceOccupied((enemyXPos, enemyYPos)): 
-            enemyXPos = random.randrange(0, game.gridMaxX-1, 1)
-            enemyYPos = random.randrange(0, game.gridMaxY-1, 1)
-        enemy = Enemy((enemyXPos, enemyYPos))
-        game.addGameObject(enemy)
-    if pressed[pygame.K_UP]: 
+        enemy_x_pos = random.randrange(0, game.grid_max_x-1, 1)
+        enemy_y_pos = random.randrange(0, game.grid_max_y-1, 1)
+        while game.is_grid_space_occupied((enemy_x_pos, enemy_y_pos)):
+            enemy_x_pos = random.randrange(0, game.grid_max_x-1, 1)
+            enemy_y_pos = random.randrange(0, game.grid_max_y-1, 1)
+        enemy = Enemy((enemy_x_pos, enemy_y_pos))
+        game.add_game_object(enemy)
+    if pressed[pygame.K_UP]:
         y -= 1
-    if pressed[pygame.K_DOWN]: 
+    if pressed[pygame.K_DOWN]:
         y += 1
-    if pressed[pygame.K_LEFT]: 
+    if pressed[pygame.K_LEFT]:
         x -= 1
-    if pressed[pygame.K_RIGHT]: 
+    if pressed[pygame.K_RIGHT]:
         x += 1
     if x != 0 or y != 0:
         player.move(x, y)
 
     # second player movement
     x = y = 0
-    if pressed[pygame.K_w]: 
+    if pressed[pygame.K_w]:
         y -= 1
-    if pressed[pygame.K_s]: 
+    if pressed[pygame.K_s]:
         y += 1
-    if pressed[pygame.K_a]: 
+    if pressed[pygame.K_a]:
         x -= 1
-    if pressed[pygame.K_d]: 
+    if pressed[pygame.K_d]:
         x += 1
     if x != 0 or y != 0:
         enemy.move(x, y)
 
     # abilities and leveling
     if not pressed[pygame.K_LSHIFT] and pressed[pygame.K_1]:
-        player.useAbility(0)
+        player.use_ability(0)
     if pressed[pygame.K_LSHIFT] and pressed[pygame.K_1]:
-        player.levelUp(0)
+        player.level_up(0)
     if not pressed[pygame.K_LSHIFT] and pressed[pygame.K_2]:
-        player.useAbility(1)
+        player.use_ability(1)
     if pressed[pygame.K_LSHIFT] and pressed[pygame.K_2]:
-        player.levelUp(1)
+        player.level_up(1)
     if not pressed[pygame.K_LSHIFT] and pressed[pygame.K_3]:
-        player.useAbility(2)
+        player.use_ability(2)
     if pressed[pygame.K_LSHIFT] and pressed[pygame.K_3]:
-        player.levelUp(2)
+        player.level_up(2)
     if not pressed[pygame.K_LSHIFT] and pressed[pygame.K_4]:
-        player.useAbility(3)
+        player.use_ability(3)
     if pressed[pygame.K_LSHIFT] and pressed[pygame.K_4]:
-        player.levelUp(3)
+        player.level_up(3)
     if not pressed[pygame.K_LSHIFT] and pressed[pygame.K_5]:
-        player.useAbility(4)
+        player.use_ability(4)
     if pressed[pygame.K_LSHIFT] and pressed[pygame.K_5]:
-        player.levelUp(4)
+        player.level_up(4)
     if not pressed[pygame.K_LSHIFT] and pressed[pygame.K_6]:
-        player.useAbility(5)
+        player.use_ability(5)
     if pressed[pygame.K_LSHIFT] and pressed[pygame.K_6]:
-        player.levelUp(5)
+        player.level_up(5)
     if not pressed[pygame.K_LSHIFT] and pressed[pygame.K_7]:
-        player.useAbility(6)
+        player.use_ability(6)
     if pressed[pygame.K_LSHIFT] and pressed[pygame.K_7]:
-        player.levelUp(6)
+        player.level_up(6)
     if not pressed[pygame.K_LSHIFT] and pressed[pygame.K_8]:
-        player.useAbility(7)
+        player.use_ability(7)
     if pressed[pygame.K_LSHIFT] and pressed[pygame.K_8]:
-        player.levelUp(7)
+        player.level_up(7)
     if not pressed[pygame.K_LSHIFT] and pressed[pygame.K_9]:
-        player.useAbility(8)
+        player.use_ability(8)
     if pressed[pygame.K_LSHIFT] and pressed[pygame.K_9]:
-        player.levelUp(8)
+        player.level_up(8)
 
     # tab targeting
     if pressed[pygame.K_TAB]:
-        player.tabTarget(game)
+        player.tab_target(game)
 
     # Add this somewhere after the event pumping and before the display.flip() 
     game.update().draw()
     pygame.display.flip()
-    pygame.time.delay(Game.SERVER_TICK_LENGTH)
+    pygame.time.delay(Game.server_tick_length)
