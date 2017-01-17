@@ -109,7 +109,7 @@ class Game(object):
 
     def draw(self):
         # unsure whether or not we need to be cautious with redraws.  Pygame might
-        # handle a lot of keeping that efficient on it's own.  Commenting out for 
+        # handle a lot of keeping that efficient on it's own.  Commenting out for
         # now
         #if not self.screen_dirty:
         #    return

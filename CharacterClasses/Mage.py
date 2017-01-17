@@ -1,4 +1,4 @@
-from GameInterfacePOC.GameObjects.Player import Player
+from GameInterfacePOC.GameObjects.Characters.Player import Player
 from GameInterfacePOC.Abilities import MageSpells
 
 class Mage(Player):

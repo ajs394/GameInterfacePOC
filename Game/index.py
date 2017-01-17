@@ -4,7 +4,7 @@ import pygame
 from GameInterfacePOC.Game.Game import Game
 from GameInterfacePOC.Surfaces.Grid import Grid
 from GameInterfacePOC.Surfaces.TextWindow import TextWindow
-from GameInterfacePOC.GameObjects.Enemy import Enemy
+from GameInterfacePOC.GameObjects.Characters.Enemy import Enemy
 from GameInterfacePOC.CharacterClasses.Mage import Mage
 
 pygame.init()

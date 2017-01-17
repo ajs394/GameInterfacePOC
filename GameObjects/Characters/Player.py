@@ -1,5 +1,5 @@
 import pygame
-from GameInterfacePOC.GameObjects.Character import Character
+from GameInterfacePOC.GameObjects.Characters.Character import Character
 from GameInterfacePOC.Game.Game import Game
 
 class Player(Character):
@@ -24,7 +24,8 @@ class Player(Character):
         self.target = None
 
     def draw(self, game):
-        game.screen.blit(self.character_screen, (self.draw_x*Game.grid_size, self.draw_y*Game.grid_size))
+        game.screen.blit(self.character_screen,
+                         (self.draw_x*Game.grid_size, self.draw_y*Game.grid_size))
         if self.target != None:
             pixel_offset = -6+(abs(12-self.target_tick))
             target_width = 2

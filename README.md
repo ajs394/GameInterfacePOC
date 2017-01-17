@@ -7,7 +7,7 @@ potentially important: if we delete a file, the compiled copy will remain.
 That might end up getting imported by something running.  Basically, just
 clean up your own compiled files every once in a while
 
-Run the __init__.py script in base dir (vscode ctrl+shift+b, or debug with f5)
+Run the index.py script in Game dir (vscode ctrl+shift+b, or debug with f5)
  - Move with arrow keys, spawn enemies with enter and move with WASD.  
  - Abilities will be used with the number keys, shift+number will level up
  - Tab will attempt to target nearest enemy, will not target out of range

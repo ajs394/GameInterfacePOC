@@ -1,7 +1,7 @@
-import pygame
+from GameInterfacePOC.GameObjects.GameObject import GameObject
 from GameInterfacePOC.Game.Game import Game
 
-class Character(object):
+class Character(GameObject):
     # in server ticks
     gcd_duration = 10.0
     MOVEMENT_DURATION = 10.0

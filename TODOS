@@ -3,6 +3,8 @@
 ### create new sections at will
 
 # General code cleanup and refactoring
+< -- Alec added a simple GameObjects class.  Should think about upgrading to
+< -- python 3.5 so we can use strong typing in method signatures
 Add a parent class to character in GameObjects - we should plan for non-char
 objects like terrain or whatever
 

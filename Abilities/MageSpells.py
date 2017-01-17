@@ -1,5 +1,5 @@
 from Ability import Ability
-from GameInterfacePOC.GameObjects.Character import Character
+from GameInterfacePOC.GameObjects.Characters.Character import Character
 
 class MagicMissile(Ability):
     def __init__(self, player):

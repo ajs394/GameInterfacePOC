@@ -1,5 +1,5 @@
 import pygame
-from GameInterfacePOC.GameObjects.Character import Character
+from GameInterfacePOC.GameObjects.Characters.Character import Character
 from GameInterfacePOC.Game.Game import Game
 
 class Enemy(Character):
