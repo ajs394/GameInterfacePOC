@@ -3,8 +3,11 @@ from abc import ABCMeta
 class GameObject(object):
     __metaclass__ = ABCMeta
 
-    def draw(self, game):
+    def __init__(self, game):
         raise NotImplementedError
 
-    def update(self, game):
+    def draw(self):
+        raise NotImplementedError
+
+    def update(self):
         raise NotImplementedError

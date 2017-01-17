@@ -3,7 +3,7 @@ class Ability(object):
 
     def __init__(self, player):
         self.name = ''
-        self.spell_range = 0
+        self.range = 0
         self.max_level = 0
         self.cd_duration = 0
         self.level = 0
@@ -12,8 +12,6 @@ class Ability(object):
         self.player = player
 
     def cast(self):
-        if not self.can_cast():
-            return self.get_cannot_cast_message()
         self.go_on_cooldown()
 
     def set_level(self, level):
@@ -23,7 +21,8 @@ class Ability(object):
         self.current_cd = self.cd_duration
 
     def can_cast(self):
-        return self.current_cd <= 0 or self.charges > 0
+        if not self.current_cd <= 0 or self.charges > 0:
+            return self.get_cannot_cast_message()
 
     def get_cannot_cast_message(self):
         message = []
@@ -40,3 +39,9 @@ class Ability(object):
 
     def level_up(self):
         self.level = min(self.level + 1, self.max_level)
+
+    def requires_target(self):
+        return False
+
+    def can_target_self(self):
+        return False

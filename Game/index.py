@@ -16,7 +16,7 @@ grid = Grid()
 text_window = TextWindow()
 game.set_background_image(grid.grid_screen)
 game.set_text_window(text_window)
-player = Mage()
+player = Mage(game)
 enemy = player
 game.add_game_object(player)
 
@@ -34,7 +34,7 @@ while not done:
         while game.is_grid_space_occupied((enemy_x_pos, enemy_y_pos)):
             enemy_x_pos = random.randrange(0, game.grid_max_x-1, 1)
             enemy_y_pos = random.randrange(0, game.grid_max_y-1, 1)
-        enemy = Enemy((enemy_x_pos, enemy_y_pos))
+        enemy = Enemy(game, (enemy_x_pos, enemy_y_pos))
         game.add_game_object(enemy)
     if pressed[pygame.K_UP]:
         y -= 1
@@ -100,7 +100,7 @@ while not done:
 
     # tab targeting
     if pressed[pygame.K_TAB]:
-        player.tab_target(game)
+        player.tab_target()
 
     # Add this somewhere after the event pumping and before the display.flip()
     game.update().draw()

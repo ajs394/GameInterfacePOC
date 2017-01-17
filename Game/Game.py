@@ -28,6 +28,11 @@ class Game(object):
         self.game_objects += [obj]
         self.grid[pos[0]][pos[1]] = obj
 
+    def remove_game_object(self, obj):
+        pos = obj.pos
+        self.game_objects.remove(obj)
+        self.grid[pos[0]][pos[1]] = None
+
     def is_grid_space_occupied(self, pos):
         if self.grid[pos[0]][pos[1]] != None:
             return True
@@ -46,6 +51,19 @@ class Game(object):
 
     def get_distance(self, pos1, pos2):
         return int(math.ceil(math.sqrt((pos1[0]-pos2[0])**2+(pos1[1]-pos2[1])**2)))
+
+    # this is just an idea for how this should work still.  Could be done better methinks
+    def cast(self, function, ability, origin, target):
+        if target is None and hasattr(ability, 'requires_target') and ability.requires_target():
+            return ['You must select a target first!']
+        if hasattr(ability, 'range') and ability.range > 0:
+            if self.get_distance(origin.pos, target.pos) > ability.range:
+                return ['Target is out of range!']
+        if hasattr(ability, 'can_cast'):
+            message = ability.can_cast()
+            if message != None:
+                return message
+        return function()
 
     def check_object_move_is_safe(self, pos1, pos2):
         # this method can get cleaned significantly.  I'll get around to it
@@ -104,7 +122,7 @@ class Game(object):
 
     def update(self):
         for obj in self.game_objects:
-            obj.update(self)
+            obj.update()
         return self
 
     def draw(self):
@@ -116,6 +134,6 @@ class Game(object):
         self.screen.blit(self.bcg, (0, 0))
         self.screen.blit(self.text_writer.text_screen, (0, Game.grid_height))
         for obj in self.game_objects:
-            obj.draw(self)
+            obj.draw()
         self.screen_dirty = False
         return self
