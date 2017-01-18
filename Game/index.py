@@ -6,6 +6,7 @@ from GameInterfacePOC.Surfaces.Grid import Grid
 from GameInterfacePOC.Surfaces.TextWindow import TextWindow
 from GameInterfacePOC.GameObjects.Characters.Enemy import Enemy
 from GameInterfacePOC.CharacterClasses.Mage import Mage
+from GameInterfacePOC.CharacterClasses.SoulTaker import SoulTaker
 
 pygame.init()
 
@@ -16,7 +17,7 @@ grid = Grid()
 text_window = TextWindow()
 game.set_background_image(grid.grid_screen)
 game.set_text_window(text_window)
-player = Mage(game)
+player = SoulTaker(game)
 enemy = player
 game.add_game_object(player)
 

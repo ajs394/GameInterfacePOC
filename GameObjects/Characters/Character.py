@@ -14,6 +14,7 @@ class Character(GameObject):
         self.health_regen = .1
         self.gcd_tick = 0
         self.messages = []
+        self.effects = []
         self.faction = ''
         self.name = 'No Name Set'
         self.can_move = True
@@ -61,6 +62,8 @@ class Character(GameObject):
                 self.pos = self.destination_pos
         if self.gcd_tick > 0:
             self.gcd_tick -= 1
+        for effect in self.effects:
+            effect.update(self)
         if self.is_dying():
             self.die()
         if not self.is_alive:
@@ -82,6 +85,21 @@ class Character(GameObject):
     def modify_health(self, change):
         self.health += change
         self.health = min(self.max_health, max(self.health, 0))
+
+    def add_effect(self, effect):
+        has_effect = False
+        for my_effect in self.effects:
+            if my_effect.name == effect.name:
+                if my_effect.can_refresh():
+                    my_effect.remaining_duration = my_effect.max_duration
+                if my_effect.can_stack():
+                    my_effect.count += 1
+                if my_effect.is_unique():
+                    self.effects += [effect]
+                has_effect = True
+                break
+        if not has_effect:
+            self.effects += [effect]
 
     def is_dying(self):
         if self.health <= 0:
