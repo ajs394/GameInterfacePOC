@@ -1,4 +1,4 @@
-from Resource import Resource
+from GameInterfacePOC.Resources.Resource import Resource
 
 class Mana(Resource):
 

@@ -1,4 +1,4 @@
-from Ability import Ability
+from GameInterfacePOC.Abilities.Ability import Ability
 from GameInterfacePOC.GameObjects.Characters.Character import Character
 
 class MagicMissile(Ability):
@@ -11,7 +11,7 @@ class MagicMissile(Ability):
         self.level = 1
         self.mana_cost = 3
 
-    def cast(self, target):
+    def cast(self, target: Character):
         message = super(MagicMissile, self).cast()
         if message != None:
             return message
@@ -20,7 +20,6 @@ class MagicMissile(Ability):
             message += ['did ' + str(i + 1) + ' damage']
             target.modify_health(-1*(i + 1))
         message += ['Target now has ' + str(target.health) + ' health!']
-        self.player.set_gcd()
         for resource in self.player.resources:
             if resource.get_name() == 'Mana':
                 resource.modify(-1*self.mana_cost)
@@ -49,7 +48,7 @@ class FireBall(Ability):
         self.level = 1
         self.mana_cost = 5 + (self.level - 3)
 
-    def cast(self, target):
+    def cast(self, target: Character):
         message = super(FireBall, self).cast()
         if message != None:
             return message
@@ -57,7 +56,6 @@ class FireBall(Ability):
         message += ['did ' + str(5*(self.level)) + ' damage in a 3x3 grid']
         target.modify_health(-5*(self.level))
         message += ['Target now has ' + str(target.health) + ' health!']
-        self.player.set_gcd()
         for resource in self.player.resources:
             if resource.get_name() == 'Mana':
                 resource.modify(-1*self.mana_cost)

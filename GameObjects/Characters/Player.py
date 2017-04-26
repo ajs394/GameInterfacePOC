@@ -25,8 +25,7 @@ class Player(Character):
         self.target = None
 
     def draw(self):
-        self.game.screen.blit(self.character_screen,
-                              (self.draw_x*Game.grid_size, self.draw_y*Game.grid_size))
+        super(Player, self).draw()
         if self.target != None:
             pixel_offset = -6+(abs(12-self.target_tick))
             target_width = 2
@@ -41,7 +40,7 @@ class Player(Character):
                              target_width)
             self.game.screen.blit(player_target_screen,
                                   ((self.target.draw_x + 1.0/2)*Game.grid_size - position_offset,
-                                  (self.target.draw_y + 1.0/2)*Game.grid_size - position_offset))
+                                   (self.target.draw_y + 1.0/2)*Game.grid_size - position_offset))
             self.target_tick = (self.target_tick + 1)%24
 
     def update(self):

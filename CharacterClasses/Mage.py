@@ -1,9 +1,10 @@
+from GameInterfacePOC.Game import Game
 from GameInterfacePOC.GameObjects.Characters.Player import Player
 from GameInterfacePOC.Abilities import MageSpells
 from GameInterfacePOC.Resources.Mana import Mana
 
 class Mage(Player):
-    def __init__(self, game):
+    def __init__(self, game: Game):
         super(Mage, self).__init__(game)
         self.name = 'Mage'
         self.abilities = [MageSpells.MagicMissile(self), MageSpells.FireBall(self)]

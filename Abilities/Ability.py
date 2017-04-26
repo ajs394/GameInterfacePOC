@@ -1,3 +1,5 @@
+from GameInterfacePOC.GameObjects.Characters import Character
+
 class Ability(object):
     # anything static and common to all abilities?
 
@@ -11,8 +13,10 @@ class Ability(object):
         self.charges = 0
         self.player = player
 
-    def cast(self):
+    def cast(self, target: Character = None):
         self.go_on_cooldown()
+        if self.is_on_gcd():
+            self.player.set_gcd()
 
     def set_level(self, level):
         self.level = level
@@ -45,3 +49,6 @@ class Ability(object):
 
     def can_target_self(self):
         return False
+
+    def is_on_gcd(self):
+        return True

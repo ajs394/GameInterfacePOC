@@ -1,3 +1,4 @@
+import pygame
 from GameInterfacePOC.GameObjects.GameObject import GameObject
 from GameInterfacePOC.Game.Game import Game
 
@@ -5,8 +6,10 @@ class Character(GameObject):
     # in server ticks
     gcd_duration = 10.0
     MOVEMENT_DURATION = 10.0
+    HEALTH_BAR_COLOR = (200, 50, 50)
+    HEALTH_BAR_THICKNESS = 2
 
-    def __init__(self, game):
+    def __init__(self, game: Game):
         self.game = game
         self.is_alive = True
         self.health = 100.0
@@ -25,10 +28,31 @@ class Character(GameObject):
         self.draw_y = self.pos[1]
         self.destination_pos = self.pos
         self.character_screen = None
+        self.health_bar_container = pygame.Surface((1.2*Game.grid_size, .2*Game.grid_size))
+        pygame.draw.rect(self.health_bar_container, Character.HEALTH_BAR_COLOR,
+                         pygame.Rect(0, 0, self.health_bar_container.get_width(),
+                                     self.health_bar_container.get_height()),
+                         Character.HEALTH_BAR_THICKNESS)
+        self.health_bar_fill = pygame.Surface((1.2*Game.grid_size, .2*Game.grid_size))
 
     def draw(self):
         self.game.screen.blit(self.character_screen, (self.draw_x*Game.grid_size,
                                                       self.draw_y*Game.grid_size))
+        # draw health bar
+        '''pixel_offset = -6+(abs(12-self.target_tick))
+        target_width = 2
+        position_offset = (abs(12-self.target_tick)/2) + 6 + target_width/2
+        pygame.draw.rect(self.health_bar_fill, Character.HEALTH_BAR_COLOR,
+                         pygame.Rect(0, 0,
+                                     self.health_bar_fill.get_width()*(self.health/self.max_health),
+                                     self.health_bar_fill.get_height()))
+        self.game.screen.blit(self.health_bar_container,
+                              ((self.draw_x + 1.0/2)*Game.grid_size - position_offset,
+                               (self.draw_y + 1.0/2)*Game.grid_size - position_offset))
+        self.game.screen.blit(self.health_bar_fill,
+                              ((self.draw_x + 1.0/2)*Game.grid_size - position_offset,
+                               (self.draw_y + 1.0/2)*Game.grid_size - position_offset))
+'''
 
     def move(self, x, y):
         if not self.can_move:

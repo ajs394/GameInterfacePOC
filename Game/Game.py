@@ -9,11 +9,11 @@ class Game(object):
     text_width = 400
     text_height = 300
     grid_size = 20
-    grid_max_x = grid_width/grid_size
-    grid_max_y = grid_height/grid_size
+    grid_max_x = int(grid_width/grid_size)
+    grid_max_y = int(grid_height/grid_size)
 
     def __init__(self):
-        self.grid = [[None for _ in xrange(Game.grid_max_y)] for _ in xrange(Game.grid_max_x)]
+        self.grid = [[None for _ in range(Game.grid_max_y)] for _ in range(Game.grid_max_x)]
         self.screen_dirty = True
         self.game_objects = []
         self.bcg = None

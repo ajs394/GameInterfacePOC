@@ -3,6 +3,7 @@
     "files.exclude": {
         "**/.git": true,
         "**/.DS_store": true,
-        "**/*.pyc": true
+        "**/*.pyc": true,
+        "**/__pycache__": true
     }
 }

@@ -4,7 +4,7 @@
         {
             "name": "Python Module",
             "type": "python",
-            "pythonPath":"${config.python.pythonPath}", 
+            "pythonPath":"${config:python.pythonPath}", 
             "request": "launch",
             "stopOnEntry": false,
             "module": "GameInterfacePOC.Game.index",

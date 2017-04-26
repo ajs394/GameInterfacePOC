@@ -1,12 +1,11 @@
 from GameInterfacePOC.GameObjects.Characters.Player import Player
-from GameInterfacePOC.Abilities import MageSpells
-from GameInterfacePOC.Abilities import SoulTakerSpells
 from GameInterfacePOC.Resources.Mana import Mana
 from GameInterfacePOC.Resources.SoulEnergy import SoulEnergy
 
 class SoulTaker(Player):
     def __init__(self, game):
         super(SoulTaker, self).__init__(game)
+        from GameInterfacePOC.Abilities import SoulTakerSpells
         self.name = 'Soul Taker'
         self.abilities = [SoulTakerSpells.SoulRend(self), SoulTakerSpells.LifeTap(self)]
         self.resources = [Mana(), SoulEnergy()]

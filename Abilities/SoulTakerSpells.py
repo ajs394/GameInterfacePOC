@@ -1,6 +1,7 @@
-from Ability import Ability
+from GameInterfacePOC.Abilities.Ability import Ability
 from GameInterfacePOC.Persistence.PlayerEffect import PlayerEffect
 from GameInterfacePOC.GameObjects.Characters.Character import Character
+from GameInterfacePOC.CharacterClasses.SoulTaker import SoulTaker
 
 class SoulTakerSpell(Ability):
     def __init__(self, player):
@@ -8,13 +9,13 @@ class SoulTakerSpell(Ability):
         self.mana_cost = 0
         self.soul_cost = 0
 
-    def cast(self, target):
+    def cast(self, target: Character):
         message = super(SoulTakerSpell, self).cast()
         if message != None:
             return message
         for resource in self.player.resources:
             if resource.get_name() == 'Mana':
-                resource.modify(-1*self.mana_cost)        
+                resource.modify(-1*self.mana_cost)
         for resource in self.player.resources:
             if resource.get_name() == 'Soul Energy':
                 resource.modify(-1*self.soul_cost)
@@ -34,13 +35,13 @@ class SoulTakerSpell(Ability):
         return message
 
 class LifeTap(SoulTakerSpell):
-    def __init__(self, player):
+    def __init__(self, player: SoulTaker):
         super(LifeTap, self).__init__(player)
         self.name = 'Life Tap'
         self.mana_cost = 20
         self.soul_cost = 0
 
-    def cast(self, target):
+    def cast(self, target: Character):
         message = super(LifeTap, self).cast(target)
         if message is not None:
             return message
@@ -50,8 +51,11 @@ class LifeTap(SoulTakerSpell):
         self.player.add_soul_energy(200)
         return message
 
+    def is_on_gcd(self):
+        return False
+
 class SoulRend(SoulTakerSpell):
-    def __init__(self, player):
+    def __init__(self, player: SoulTaker):
         super(SoulRend, self).__init__(player)
         self.name = 'Soul Rend'
         self.mana_cost = 0
@@ -75,7 +79,7 @@ class SoulRend(SoulTakerSpell):
         return True
 
 class SoulRendDot(PlayerEffect):
-    def __init__(self, caster):
+    def __init__(self, caster: SoulTaker):
         super(SoulRendDot, self).__init__()
         self.caster = caster
         self.name = 'Soul Rend'
@@ -83,7 +87,7 @@ class SoulRendDot(PlayerEffect):
         self.max_duration = 100
         self.count = 1
 
-    def update(self, player):
+    def update(self, player: SoulTaker):
         self.remaining_duration -= 1
         # route A: assume that 'player' is a soultaker
         self.caster.add_soul_energy()
